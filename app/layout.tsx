@@ -1,12 +1,14 @@
-import "@/styles/globals.css"
-import { Metadata } from "next"
+import '@/styles/globals.css'
 
-import { siteConfig } from "@/config/site"
-import { fontSans } from "@/lib/fonts"
-import { cn } from "@/lib/utils"
-import { SiteHeader } from "@/components/site-header"
-import { TailwindIndicator } from "@/components/tailwind-indicator"
-import { ThemeProvider } from "@/components/theme-provider"
+import { Metadata } from 'next'
+
+import { siteConfig } from '@/config/site'
+import { fontMono, fontSans } from '@/lib/fonts'
+import { cn } from '@/lib/utils'
+import { Footer } from '@/components/footer'
+import { SiteHeader } from '@/components/site-header'
+import { TailwindIndicator } from '@/components/tailwind-indicator'
+import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
   title: {
@@ -15,13 +17,13 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
   ],
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
   },
 }
 
@@ -36,14 +38,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen bg-background font-sans antialiased",
+            'min-h-screen bg-background font-sans antialiased',
             fontSans.variable
           )}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
-              <div className="flex-1">{children}</div>
+              {/* Centered container with max-width */}
+              <div className="flex-1 flex justify-center">
+                <div className="w-full max-w-7xl mx-auto">{children}</div>
+              </div>
+              <Footer className="border-t" />
             </div>
             <TailwindIndicator />
           </ThemeProvider>
