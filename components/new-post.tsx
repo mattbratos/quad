@@ -1,52 +1,63 @@
 'use client'
 
+// import { cookies } from 'next/headers'
+// import { cookies } from 'next/headers'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { ToastAction } from '@/components/ui/toast'
+import { useToast } from '@/components/ui/use-toast'
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
+  content: z.string().min(2, {
+    message: 'Post must be at least 2 characters.',
   }),
 })
 
 export function NewPost() {
-  8 // 1. Define your form.
+  const { toast } = useToast()
+
+  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: '',
+      content: '',
     },
   })
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function addNewPost(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+
+    const content = String(values.content)
+    const supabase = createServerActionClient<Database>({ cookies })
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+    if (user) {
+      await supabase.from('posts').insert({ content, user_id: user.id })
+    }
   }
 
   return (
-    <div className="">
+    <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
+        <form onClick={form.handleSubmit(addNewPost)}>
           <FormField
             control={form.control}
-            name="username"
+            name="content"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
@@ -59,77 +70,81 @@ export function NewPost() {
               </FormItem>
             )}
           />
+
+          <div className="flex justify-between w-full py-4">
+            <div className="flex items-center">
+              <span>280</span>
+            </div>
+            <div className="flex items-center">
+              <Button size="sm" type="submit">
+                Tweet
+              </Button>
+            </div>
+          </div>
         </form>
-        <div className="flex justify-between w-full py-4">
-          <div className="flex items-center">
-            <span>280</span>
-          </div>
-          <div className="flex items-center">
-            <Button size="sm" type="submit">
-              Tweet
-            </Button>
-          </div>
-        </div>
       </Form>
     </div>
   )
 }
 
-// 'use client'
+// import { cookies } from 'next/headers'
+// import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
 
-// import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 // import { Button } from '@/components/ui/button'
 // import {
-//   Card,
-//   CardContent,
-//   CardDescription,
-//   CardFooter,
-//   CardHeader,
-//   CardTitle,
-// } from '@/components/ui/card'
+//   Form,
+//   FormControl,
+//   FormField,
+//   FormItem,
+//   FormMessage,
+// } from '@/components/ui/form'
 // import { Textarea } from '@/components/ui/textarea'
+// import { ToastAction } from '@/components/ui/toast'
+// import { useToast } from '@/components/ui/use-toast'
 
-// export function NewPost() {
+// export default function NewPost() {
+//   const addPost = async (formData: FormData) => {
+//     'use server'
+//     const content = String(formData.get('content'))
+//     const supabase = createServerActionClient<Database>({ cookies })
+//     const {
+//       data: { user },
+//     } = await supabase.auth.getUser()
+//     if (user) {
+//       await supabase.from('posts').insert({ content, user_id: user.id })
+//     }
+//   }
+
 //   return (
-//     <>
-//       <Card>
-//         <CardHeader>
-// <div className="flex items-center gap-3">
-//   <Avatar>
-//     <AvatarImage alt="@shadcn" src="public/placeholder-avatar.jpg" />
-//     <AvatarFallback>SC</AvatarFallback>
-//   </Avatar>
-//   <div className="flex flex-col">
-//     <span className="text-sm font-medium">Shadcn</span>
-//     <span className="text-xs">@shadcn</span>
-//   </div>
+//     <Form {...form}>
+//       <form onClick={form.handleSubmit(addNewPost)}>
+//         <FormField
+//           control={form.control}
+//           name="content"
+//           render={({ field }) => (
+//             <FormItem>
+//               <FormControl>
+//                 <Textarea
+//                   className="w-full min-h-[150px] p-4 rounded-lg mt-4 "
+//                   placeholder="What's happening?"
+//                   {...field}
+//                 />
+//               </FormControl>
+//             </FormItem>
+//           )}
+//         />
+
+//         <div className="flex justify-between w-full py-4">
+//           <div className="flex items-center">
+//             <span>280</span>
 //           </div>
-//         </CardHeader>
-//         <CardContent>
-// <Textarea
-//   className="w-full min-h-[150px] p-4 rounded-lg "
-//   placeholder="What's happening?"
-// />
-//         </CardContent>
-//         <CardFooter>
-// <div className="flex justify-between w-full ">
-//   <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-//     <span>280</span>
-//     <div className="h-[6px] w-full bg-gray-200 rounded-full dark:bg-gray-600">
-//       <div
-//         className="h-[6px]"
-//         style={{
-//           width: '50%',
-//         }}
-//       />
-//     </div>
-//   </div>
-//   <div className="flex items-center gap-2">
-//     <Button size="sm">Tweet</Button>
-//   </div>
-// </div>
-//         </CardFooter>
-//       </Card>
-//     </>
+//           <div className="flex items-center">
+//             <Button size="sm" type="submit">
+//               Tweet
+//             </Button>
+//           </div>
+//         </div>
+//       </form>
+//     </Form>
 //   )
 // }

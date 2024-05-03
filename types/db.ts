@@ -11,21 +11,21 @@ export type Database = {
     Tables: {
       posts: {
         Row: {
+          content: string
           created_at: string
           id: string
-          text: string
           user_id: string
         }
         Insert: {
+          content: string
           created_at?: string
           id?: string
-          text: string
           user_id: string
         }
         Update: {
+          content?: string
           created_at?: string
           id?: string
-          text?: string
           user_id?: string
         }
         Relationships: [
@@ -36,29 +36,36 @@ export type Database = {
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "posts_user_id_fkey1"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
         ]
       }
       profiles: {
         Row: {
-          avatar_url: string
+          avatar_url: string | null
           created_at: string
           id: string
-          name: string
-          username: string
+          name: string | null
+          username: string | null
         }
         Insert: {
-          avatar_url: string
+          avatar_url?: string | null
           created_at?: string
           id: string
-          name: string
-          username: string
+          name?: string | null
+          username?: string | null
         }
         Update: {
-          avatar_url?: string
+          avatar_url?: string | null
           created_at?: string
           id?: string
-          name?: string
-          username?: string
+          name?: string | null
+          username?: string | null
         }
         Relationships: [
           {

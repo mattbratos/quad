@@ -4,15 +4,12 @@ declare global {
   type Database = DB
 }
 
-// export interface PageMeta {
-//   title: string
-//   description: string
-//   cardImage: string
-//   url: string
-//   robots?: string
-//   favicon?: string
-//   type?: string
-// }
+export interface Post {
+  content: string
+  created_at: string
+  id: string
+  user_id: string
+}
 
 // export interface User {
 //   created_at: string | null

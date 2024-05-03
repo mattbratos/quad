@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 import { siteConfig } from '@/config/site'
 import { fontMono, fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
+import { Toaster } from '@/components/ui/sonner'
 import { Footer } from '@/components/footer'
 import { SiteHeader } from '@/components/site-header'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
@@ -51,7 +52,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
               </div>
               <Footer className="border-t" />
             </div>
-            <TailwindIndicator />
           </ThemeProvider>
         </body>
       </html>
