@@ -7,5 +7,9 @@ interface AuthLayoutProps {
 export default async function AuthLayout({ children }: AuthLayoutProps) {
   const user = await getAuthUser()
 
-  return <div>{children}</div>
+  return (
+    <div className="max-w-3xl mx-auto min-h-[100vh] border-r border-l ">
+      {children}
+    </div>
+  )
 }

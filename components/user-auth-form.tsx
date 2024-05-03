@@ -15,6 +15,7 @@ export default function UserAuthForm() {
         providers={['github']}
         redirectTo={getURL()}
         magicLink={true}
+        view="sign_up"
         appearance={{
           className: {
             anchor:

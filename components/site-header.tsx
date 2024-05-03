@@ -1,27 +1,17 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import { siteConfig } from '@/config/site'
-import { cn } from '@/lib/utils'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { Icons } from '@/components/icons'
+import AuthButtonServer from '@/components/auth-button-server'
 import { MainNav } from '@/components/main-nav'
-import { ThemeToggle } from '@/components/theme-toggle'
 
 export function SiteHeader() {
   return (
     <header className="bg-background sticky top-0 z-40 w-full border-b">
-      <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
+      <div className="container flex h-12 items-center sm:justify-between sm:space-x-0">
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
-            <Link
-              href="/login"
-              className={cn(buttonVariants({ size: 'lg', variant: 'ghost' }))}
-            >
-              Log in
-            </Link>
-            {/* <ThemeToggle /> */}
+            <AuthButtonServer />
           </nav>
         </div>
       </div>

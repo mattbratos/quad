@@ -47,7 +47,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <SiteHeader />
               {/* Centered container with max-width */}
               <div className="flex-1 flex justify-center">
-                <div className="w-full max-w-7xl mx-auto">{children}</div>
+                <div className="w-full max-w-[1600px] mx-auto">{children}</div>
               </div>
               <Footer className="border-t" />
             </div>

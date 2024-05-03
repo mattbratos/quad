@@ -3,11 +3,19 @@ export type SiteConfig = typeof siteConfig
 export const siteConfig = {
   name: 'Quad',
   description:
-    'Beautifully designed components built with Radix UI and Tailwind CSS.',
+    'Full Stack Twitter clone with Supabase, NextJS app router, Shadcn ',
   mainNav: [
     {
       title: 'Home',
       href: '/',
+    },
+    {
+      title: 'Feed',
+      href: '/feed',
+    },
+    {
+      title: 'Author',
+      href: '/author',
     },
   ],
   links: {
