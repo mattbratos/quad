@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
@@ -11,7 +12,7 @@ export function LandingPage() {
       <section className='w-full py-12 md:pb-48 lg:pb-64 xl:pb-96 '>
         <div className='container px-4 md:px-6'>
           <div className='grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]'>
-            <img
+            <Image
               alt='Quad Hero'
               className='mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last lg:aspect-square'
               height='550'
@@ -65,7 +66,7 @@ export function LandingPage() {
             </div>
           </div>
           <div className='mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12'>
-            <img
+            <Image
               alt='Quad Features'
               className='mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last'
               height='310'
