@@ -5,10 +5,8 @@ import { Metadata } from 'next'
 import { siteConfig } from '@/config/site'
 import { fontMono, fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
-import { Toaster } from '@/components/ui/sonner'
 import { Footer } from '@/components/footer'
 import { SiteHeader } from '@/components/site-header'
-import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
@@ -35,7 +33,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
-      <html lang="en" suppressHydrationWarning>
+      <html lang='en' suppressHydrationWarning>
         <head />
         <body
           className={cn(
@@ -43,14 +41,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
+          <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+            <div className='relative flex min-h-screen flex-col'>
               <SiteHeader />
               {/* Centered container with max-width */}
-              <div className="flex-1 flex justify-center">
-                <div className="w-full max-w-[1600px] mx-auto">{children}</div>
+              <div className='flex flex-1 justify-center'>
+                <div className='mx-auto w-full max-w-[1600px]'>{children}</div>
               </div>
-              <Footer className="border-t" />
+              <Footer className='border-t' />
             </div>
           </ThemeProvider>
         </body>
