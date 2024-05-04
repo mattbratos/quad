@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/supabase/server'
 
-import { NewPost } from '@/components/new-post'
+import { NewPost2 } from '@/components/new-post2'
 
 export default async function Yo() {
   const supabase = createClient()
@@ -17,7 +17,7 @@ export default async function Yo() {
   const { data: posts } = await supabase.from('posts').select('*, profiles(*)')
   return (
     <section className="container grid items-center ">
-      <NewPost />
+      <NewPost2 />
     </section>
   )
 }

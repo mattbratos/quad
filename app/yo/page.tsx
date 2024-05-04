@@ -1,25 +1,39 @@
+import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/supabase/server'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+
+import Likes from '@/components/likes'
+import NewPost from '@/components/new-post'
 
 export default async function Yo() {
-  const supabase = createClient()
+  const supabase = createServerComponentClient<Database>({ cookies })
 
   const {
-    data: { user },
-  } = await supabase.auth.getUser()
+    data: { session },
+  } = await supabase.auth.getSession()
 
-  if (!user) {
-    return redirect('/login')
+  if (!session) {
+    redirect('/login')
   }
 
   const { data: posts } = await supabase.from('posts').select('*, profiles(*)')
+
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex max-w-[980px] flex-col items-start gap-2">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
           Yo
         </h1>
-        <pre className="">{JSON.stringify(posts, null, 2)}</pre>
+        <NewPost />
+        {posts?.map((post) => (
+          <div key={post.id}>
+            <p>
+              {post?.profiles?.name} {post?.profiles?.username}
+            </p>
+            <p>{post.content}</p>
+          </div>
+        ))}
       </div>
     </section>
   )
