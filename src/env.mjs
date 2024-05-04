@@ -7,5 +7,7 @@ export const env = createEnv({
   },
   runtimeEnv: {
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    DATABASE_URL_UNPOOLED: process.env.DATABASE_URL_UNPOOLED,
+    DATABASE_URLL: process.env.DATABASE_URL,
   },
 })
