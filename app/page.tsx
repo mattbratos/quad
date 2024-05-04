@@ -1,21 +1,33 @@
-import { cookies } from 'next/headers'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import Link from "next/link"
 
-import { LandingPage } from '@/components/landing-page'
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+import { Icons } from "@/components/icons"
+import { ModeToggle } from "@/components/mode-toggle"
 
-export default async function Home() {
-  const supabase = createServerComponentClient({ cookies })
-  const { data: posts } = await supabase.from('posts').select('*, profiles(*)')
-
+export default function Home() {
   return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      {/* <div className="flex max-w-[980px] flex-col items-start gap-2">
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Beautifully designed components <br className="hidden sm:inline" />
-          built with Radix UI and Tailwind CSS.
+    <main className="flex h-screen items-center justify-center">
+      <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
+        <Icons.logo className="h-16 w-16" />
+        <h1 className="text-4xl font-semibold sm:text-5xl md:text-6xl lg:text-7xl">
+          {siteConfig.name}
         </h1>
-      </div> */}
-      <LandingPage />
-    </section>
+        <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
+          {siteConfig.description}
+        </p>
+        <div className="flex gap-2">
+          <Link
+            href={siteConfig.links.github}
+            target="_blank"
+            className={cn(buttonVariants({ size: "default" }))}
+          >
+            Get Started
+          </Link>
+          <ModeToggle />
+        </div>
+      </div>
+    </main>
   )
 }
