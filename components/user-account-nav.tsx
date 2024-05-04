@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 // import { Database } from '@/types/db'
-import { User } from '@/types/main'
+// import { User } from '@/types/main'
 import { Avatar } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -19,25 +19,17 @@ interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, 'name' | 'image' | 'email'>
 }
 
-export function UserAccountNav({ user }: UserAccountNavProps) {
-  const router = useRouter()
-  const supabase = createClientComponentClient<Database>()
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut()
-    router.refresh()
-  }
-
+export function UserAccountNav() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar
+        {/* <Avatar
           user={{ name: user.name || null, image: user.image || null }}
           className="h-8 w-8"
-        />
+        /> */}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <div className="flex items-center justify-start gap-2 p-2">
+        {/* <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
             {user.name && <p className="font-medium">{user.name}</p>}
             {user.email && (
@@ -46,7 +38,7 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
               </p>
             )}
           </div>
-        </div>
+        </div> */}
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/dashboard">Dashboard</Link>
@@ -61,9 +53,9 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
           <Link href="/dashboard/settings">Settings</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer" onSelect={handleSignOut}>
+        {/* <DropdownMenuItem className="cursor-pointer" onSelect={handleSignOut}>
           Sign out
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
   )

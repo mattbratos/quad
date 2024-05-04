@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { siteConfig } from '@/config/site'
-import AuthButtonServer from '@/components/auth-button-server'
+// import AuthButtonServer from '@/components/auth-button-server'
 import { MainNav } from '@/components/main-nav'
 
 export function SiteHeader() {
@@ -11,7 +11,7 @@ export function SiteHeader() {
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
-            <AuthButtonServer />
+            {/* <AuthButtonServer /> */}
           </nav>
         </div>
       </div>

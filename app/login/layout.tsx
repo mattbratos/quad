@@ -1,11 +1,11 @@
-import { getAuthUser } from '@/supabase/server'
+// import { getAuthUser } from '@/supabase/server'
 
-interface AuthLayoutProps {
-  children: React.ReactNode
-}
+// interface AuthLayoutProps {
+//   children: React.ReactNode
+// }
 
-export default async function AuthLayout({ children }: AuthLayoutProps) {
-  const user = await getAuthUser()
+// export default async function AuthLayout({ children }: AuthLayoutProps) {
+//   const user = await getAuthUser()
 
-  return <div>{children}</div>
-}
+//   return <div>{children}</div>
+// }

@@ -1,15 +1,15 @@
-// auth-button-server.tsx
+// // auth-button-server.tsx
 
-import { cookies } from 'next/headers'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+// import { cookies } from 'next/headers'
+// import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 
-import AuthButtonClient from './auth-button-client'
+// import AuthButtonClient from './auth-button-client'
 
-export default async function AuthButtonServer() {
-  const supabase = createServerComponentClient({ cookies })
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
+// export default async function AuthButtonServer() {
+//   const supabase = createServerComponentClient({ cookies })
+//   const {
+//     data: { session },
+//   } = await supabase.auth.getSession()
 
-  return <AuthButtonClient session={session} />
-}
+//   return <AuthButtonClient session={session} />
+// }
