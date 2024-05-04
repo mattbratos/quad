@@ -1,19 +1,26 @@
-import { SiteConfig } from '@/types'
+export type SiteConfig = typeof siteConfig
 
-import { env } from '@/env.mjs'
-
-export const siteConfig: SiteConfig = {
-  name: 'Next Entree',
-  author: 'redpangilinan',
+export const siteConfig = {
+  name: 'Quad',
   description:
-    'Next.js 14+ starter template with app router, shadcn/ui, typesafe env, icons and configs setup.',
-  keywords: ['Next.js', 'React', 'Tailwind CSS', 'Radix UI', 'shadcn/ui'],
-  url: {
-    base: env.NEXT_PUBLIC_APP_URL,
-    author: 'https://rdev.pro',
-  },
+    'Full Stack Twitter clone with Supabase, NextJS app router, Shadcn ',
+  mainNav: [
+    {
+      title: 'Home',
+      href: '/',
+    },
+    {
+      title: 'Feed',
+      href: '/feed',
+    },
+    {
+      title: 'Author',
+      href: '/author',
+    },
+  ],
   links: {
-    github: 'https://github.com/redpangilinan/next-entree',
+    twitter: 'https://twitter.com/mattbratos',
+    github: 'https://github.com/mattbratos',
+    docs: 'https://mattbratos.com',
   },
-  ogImage: `${env.NEXT_PUBLIC_APP_URL}/og.jpg`,
 }
