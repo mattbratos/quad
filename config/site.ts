@@ -17,6 +17,10 @@ export const siteConfig = {
       title: 'Author',
       href: '/author',
     },
+    {
+      title: 'Yo',
+      href: '/yo',
+    },
   ],
   links: {
     twitter: 'https://twitter.com/mattbratos',
